@@ -9,6 +9,8 @@ Java EE 6 web app to control watering systems.
 
 This project is somewhat make believe.  This software side is fairly simple relative to the complexity of the hardware side.  I'm writing this more as a showcase (and test) of my EJB abilities.  However I'd love to complete this bolts 'n all, as the watering system we inherited at our new house is circa 1985.  The interface is clumsy and its stuck under the house.  It would be interesting to setup the hardware side and there are a number of web sites that discuss using an Ardino - "See google search":https://www.google.com.au/search?q=arduino+watering+system&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-GB:official&client=firefox-a.  And then once done it would be interesting to have clients on iPhone or just the desktop.  Yes there are projects for this already but I didn't write them!
 
+Why write a watering system as a showcase and test of my EJB abilities?  Because its unique - there are a million e-commerce ejb applications.
+
 h2. Running
 
 h3. Configuration
