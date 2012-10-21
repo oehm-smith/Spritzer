@@ -1,0 +1,31 @@
+h1. Spritzer
+
+h2. Overview
+Java EE 6 web app to control watering systems.  
+* Setup garden configuration (which must match your actual garden configuration)
+* Setup sprinkler configurations (which must match what you do to the physical sprinklers!)
+* Setup programmes 
+* Setup schedules
+
+This project is somewhat make believe.  This software side is fairly simple relative to the complexity of the hardware side.  I'm writing this more as a showcase (and test) of my EJB abilities.  However I'd love to complete this bolts 'n all, as the watering system we inherited at our new house is circa 1985.  The interface is clumsy and its stuck under the house.  It would be interesting to setup the hardware side and there are a number of web sites that discuss using an Ardino - "See google search":https://www.google.com.au/search?q=arduino+watering+system&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-GB:official&client=firefox-a.  And then once done it would be interesting to have clients on iPhone or just the desktop.  Yes there are projects for this already but I didn't write them!
+
+h2. Running
+
+h3. Configuration
+
+This project requires a Java EE web container such as Glassfish, JBoss, Oracle Application Server, WebSphere and so on.  I developed the code using Glassfish.
+
+I wrote it in Netbeans but its a Maven application so should run in Eclipse easily enough.
+
+It requires a database called 'Spritzer' so create a blank database for this (the application will set up the tables) and and create a jndi reference to this.  In Netbeans (Eclipse instructions will be done soon):
+# Go to the Services tab
+# Expand 'Databases'
+# Right-click the database type - JavaDB or setup another such as MySQL or Progresql and choose "Create Database..." and follow the prompts
+
+Checkout this project to your desired directory.
+
+Open the Maven project in your IDE.
+
+h3. Starting app
+* Netbeans - right-click on the project and choose 'Run' - it will ask for your Application Server; and then the webpage should open.
+
