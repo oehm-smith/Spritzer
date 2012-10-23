@@ -36,7 +36,7 @@ import javax.persistence.Query;
  * @author adam-bien.com
  */
 @Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class CrudService {
    
     @Inject
@@ -47,11 +47,6 @@ public class CrudService {
         this.em.flush();
         this.em.refresh(t);
         return t;
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T> T find(Class<T> type,Object id) {
-       return (T) this.em.find(type, id);
     }
 
     public <T> void delete(T t) {
@@ -67,11 +62,16 @@ public class CrudService {
         return (T)this.em.merge(t);
     }
 
+    @SuppressWarnings("unchecked")
+    public <T> T find(Class<T> type,Integer id) {
+       return (T) this.em.find(type, id);
+    }
+
     public List findWithNamedQuery(String namedQueryName){
-        return this.em.createNamedQuery(namedQueryName).getResultList();
+        return this.em.createNamedQuery(namedQueryName).getResultList();    
     }
     
-    public List findWithNamedQuery(String namedQueryName, Map<String,Object> parameters){
+    public List findWithNamedQuery(String namedQueryName, QueryParameter parameters){
         return findWithNamedQuery(namedQueryName, parameters, 0);
     }
 
@@ -85,8 +85,8 @@ public class CrudService {
         return this.em.createNativeQuery(sql, type).getResultList();
     }
     
-   public List findWithNamedQuery(String namedQueryName, Map<String,Object> parameters,int resultLimit){
-        Set<Entry<String, Object>> rawParameters = parameters.entrySet();
+   public List findWithNamedQuery(String namedQueryName, QueryParameter parameters,int resultLimit){
+        Set<Entry<String, Object>> rawParameters = parameters.parameters().entrySet();
         Query query = this.em.createNamedQuery(namedQueryName);
         if(resultLimit > 0)
             query.setMaxResults(resultLimit);

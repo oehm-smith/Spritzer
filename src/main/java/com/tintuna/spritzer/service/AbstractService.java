@@ -5,6 +5,7 @@
 package com.tintuna.spritzer.service;
 
 import com.tintuna.spritzer.crud.CrudService;
+import com.tintuna.spritzer.domain.Garden;
 import com.tintuna.spritzer.domain.Sprinklerset;
 import com.tintuna.spritzer.exception.ValidationException;
 import java.util.List;
@@ -14,10 +15,18 @@ import javax.inject.Inject;
  *
  * @author bsmith
  */
-class AbstractService<T> {
+public class AbstractService<T> {
 
     @Inject protected CrudService crud;
 
+    /**
+     * Pass-through to allow service users to call crud operations directly - such as all the find*() methods
+     * @return 
+     */
+    public CrudService getCrudService() {
+        return crud;
+    }
+    
     public <T> T create(final T item) {
         if (item == null) {
             throw new ValidationException("AbstractService<T> / create() - object is null.");
@@ -48,5 +57,11 @@ class AbstractService<T> {
         String namedQueryString = this.getClass().getName().replace("Service","").replace("com.tintuna.spritzer.service.","") + ".findAll";
         List<T> list = crud.findWithNamedQuery(namedQueryString);
         return list;
+    }
+
+    public <T> T find(Class<T> type,String id) {
+        String s = id.replaceAll("\"", "");
+        Integer i = Integer.parseInt(s);
+        return (T) getCrudService().find(type, i);
     }
 }

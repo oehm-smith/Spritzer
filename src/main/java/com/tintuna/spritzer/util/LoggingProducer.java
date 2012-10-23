@@ -1,5 +1,6 @@
 package com.tintuna.spritzer.util;
 
+import java.io.Serializable;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import java.util.logging.Logger;
@@ -9,7 +10,7 @@ import java.util.logging.Logger;
  *         http://www.antoniogoncalves.org
  *         --
  */
-public class LoggingProducer {
+public class LoggingProducer implements Serializable {
 
     // ======================================
     // =          Business methods          =

@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Schedule.findById", query = "SELECT s FROM Schedule s WHERE s.id = :id"),
     @NamedQuery(name = "Schedule.findByName", query = "SELECT s FROM Schedule s WHERE s.name = :name"),
     @NamedQuery(name = "Schedule.findByStartDate", query = "SELECT s FROM Schedule s WHERE s.startDate = :startDate"),
-    @NamedQuery(name = "Schedule.findByEndDate", query = "SELECT s FROM Schedule s WHERE s.endDate = :endDate")})
+    @NamedQuery(name = "Schedule.findByEndDate", query = "SELECT s FROM Schedule s WHERE s.endDate = :endDate"),
+    @NamedQuery(name = "Schedule.findByGardenId", query = "SELECT s FROM Schedule s WHERE s.startDate = :startDate")})
 public class Schedule implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

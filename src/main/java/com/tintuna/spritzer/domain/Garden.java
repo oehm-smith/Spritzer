@@ -102,6 +102,9 @@ public class Garden implements Serializable {
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
+//        if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
+//            return false;
+//        }
         return true;
     }
 

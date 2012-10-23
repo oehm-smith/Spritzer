@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Sprinklerset.findAll", query = "SELECT s FROM Sprinklerset s"),
     @NamedQuery(name = "Sprinklerset.findById", query = "SELECT s FROM Sprinklerset s WHERE s.id = :id"),
-    @NamedQuery(name = "Sprinklerset.findByName", query = "SELECT s FROM Sprinklerset s WHERE s.name = :name")})
+    @NamedQuery(name = "Sprinklerset.findByName", query = "SELECT s FROM Sprinklerset s WHERE s.name = :name"),
+    @NamedQuery(name = "Sprinklerset.findByGarden", query = "SELECT s FROM Sprinklerset s WHERE s.gardenID = :gardenId")})
 public class Sprinklerset implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
