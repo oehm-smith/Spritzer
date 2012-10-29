@@ -5,6 +5,7 @@
 package com.tintuna.spritzer.service;
 
 import com.tintuna.spritzer.crud.CrudService;
+import com.tintuna.spritzer.crud.QueryParameter;
 import com.tintuna.spritzer.domain.Garden;
 import com.tintuna.spritzer.domain.Sprinklerset;
 import com.tintuna.spritzer.exception.ValidationException;
@@ -23,7 +24,7 @@ public class AbstractService<T> {
      * Pass-through to allow service users to call crud operations directly - such as all the find*() methods
      * @return 
      */
-    public CrudService getCrudService() {
+    private CrudService getCrudService() {
         return crud;
     }
     
@@ -63,5 +64,9 @@ public class AbstractService<T> {
         String s = id.replaceAll("\"", "");
         Integer i = Integer.parseInt(s);
         return (T) getCrudService().find(type, i);
+    }
+    
+    public List findWithNamedQuery(String namedQueryName, QueryParameter parameters){
+        return crud.findWithNamedQuery(namedQueryName, parameters);
     }
 }

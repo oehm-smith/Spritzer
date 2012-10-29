@@ -111,7 +111,7 @@ public class Garden implements Serializable {
     @Override
     public String toString() {
         //return "com.tintuna.domain.Garden[ id=" + id + " ]";
-        return getName();
+        return "[Garden - id: "+getId()+" - "+getName()+"]";
     }
     
 }

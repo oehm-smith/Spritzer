@@ -10,8 +10,10 @@ import com.tintuna.spritzer.service.GardenService;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,6 +23,7 @@ import javax.inject.Named;
  * @author bsmith
  */
 @Named
+@SessionScoped
 public class GardenController extends Controller implements Serializable {
 
     private Garden selected;
@@ -34,28 +37,37 @@ public class GardenController extends Controller implements Serializable {
         List<Garden> gardenList = gardenService.findAll();
         List<SelectItem> gardenSList = new ArrayList<SelectItem>();
         System.out.println("-> getGardens() - " + gardenList);
+        gardenSList.add(new SelectItem(null));
         for (Garden g : gardenList) {
             gardenSList.add(new SelectItem(g));
         }
-        return gardenSList;
+         System.out.println("-> getGardens() - the selected is - "+selected);
+       return gardenSList;
     }
 
     public Garden getSelected() {
-        System.out.println("Garden / getSelected");
+        System.out.println("GardenController / getSelected - "+selected);
         return selected;
     }
 
     public void setSelected(Garden garden) {
-        System.out.println("Garden / setSelected");
         selected = garden;
+        System.out.println("GardenController / setSelected - "+selected);
     }
 
-    public void selectedChanged(AjaxBehaviorEvent e) {
+    public void selectedChanged(ValueChangeEvent event) {
+        Garden newValue = (Garden) event.getNewValue();
+        Garden oldValue = (Garden) event.getOldValue();
+        //setSelected(newValue);
+        System.out.println("-> selectedChanged - OldValue: " + oldValue + ", NewValue:" + newValue);
+    }
+
+    public void selectedChangedAjax(AjaxBehaviorEvent e) {
         UIInput input = (UIInput) e.getComponent();
-        String contentId = input.getId().substring("inputfield".length());
-        Object contentValue = (Object) input.getValue();
+//        String contentId = input.getId().substring("inputfield".length());
+//        Object contentValue = (Object) input.getValue();
 //        String value = (String) contentValue;
-        System.out.println("selectedChanged - string:" + e.toString() + ","+input.getId()+"=>"+contentValue);
+        System.out.println("selectedChanged - string:" + e.toString() + "," + input.getId() + "=> NUTIN");// + contentValue);
 
         //setSelected((Garden) e.getNewValue());
     }
