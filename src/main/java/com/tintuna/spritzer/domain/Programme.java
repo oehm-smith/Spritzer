@@ -38,13 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Programme.findById", query = "SELECT p FROM Programme p WHERE p.id = :id"),
     @NamedQuery(name = "Programme.findByOnTime", query = "SELECT p FROM Programme p WHERE p.onTime = :onTime"),
     @NamedQuery(name = "Programme.findByDuration", query = "SELECT p FROM Programme p WHERE p.duration = :duration")})
-public class Programme implements Serializable {
+public class Programme extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "on_Time", nullable = false)
@@ -79,14 +74,6 @@ public class Programme implements Serializable {
         this.id = id;
         this.onTime = onTime;
         this.duration = duration;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Date getOnTime() {

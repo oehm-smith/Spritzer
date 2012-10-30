@@ -34,13 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Run.findById", query = "SELECT r FROM Run r WHERE r.id = :id"),
     @NamedQuery(name = "Run.findByDateOn", query = "SELECT r FROM Run r WHERE r.dateOn = :dateOn"),
     @NamedQuery(name = "Run.findByDateOff", query = "SELECT r FROM Run r WHERE r.dateOff = :dateOff")})
-public class Run implements Serializable {
+public class Run extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "dateOn", nullable = false)
@@ -63,14 +58,6 @@ public class Run implements Serializable {
     public Run(Integer id, Date dateOn) {
         this.id = id;
         this.dateOn = dateOn;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Date getDateOn() {

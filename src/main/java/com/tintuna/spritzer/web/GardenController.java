@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -29,27 +30,25 @@ import javax.inject.Named;
 public class GardenController extends Controller implements Serializable {
 
     private Garden selected;
-    @Inject private GardenService gardenService;
+    //@Inject private GardenService gardenService;
 
-    public AbstractService getService() {
-        return gardenService;
+    // TODO - There should be a more automagic way of doing this such as with @Produces and @SomeQualifier
+    //@PostConstruct
+    @Inject
+    public void setService(GardenService gardenService) {
+        super.setService(gardenService);
     }
 
     public Object getGardens() {    // List<SelectItem>
-        List<Garden> gardenList = gardenService.findAll();
+        List<Garden> gardenList = getService().findAll();
         List<SelectItem> gardenSList = new ArrayList<SelectItem>();
         System.out.println("-> getGardens() - " + gardenList);
-//        gardenSList.add(new SelectItem(null, "-- select one --"));
-//        for (Garden g : gardenList) {
-//            gardenSList.add(new SelectItem(g));
-//        }
         Map<Garden, String> gardensMap = new LinkedHashMap<Garden, String>();
         gardensMap.put(null, "-- select one --");
         for (Garden g : gardenList) {
             gardensMap.put(g, g.getName());
         }
         System.out.println("-> getGardens() - the selected is - " + selected);
-//        return gardenSList;
         return gardensMap;
     }
 

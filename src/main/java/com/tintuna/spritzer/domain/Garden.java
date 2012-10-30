@@ -29,17 +29,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "garden")
 @XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "Garden.findAll", query = "SELECT g FROM Garden g"),
     @NamedQuery(name = "Garden.findById", query = "SELECT g FROM Garden g WHERE g.id = :id"),
     @NamedQuery(name = "Garden.findByName", query = "SELECT g FROM Garden g WHERE g.name = :name")})
-public class Garden implements Serializable {
+public class Garden extends BaseEntity implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -58,14 +55,6 @@ public class Garden implements Serializable {
     public Garden(Integer id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -111,7 +100,6 @@ public class Garden implements Serializable {
     @Override
     public String toString() {
         //return "com.tintuna.domain.Garden[ id=" + id + " ]";
-        return "[Garden - id: "+getId()+" - "+getName()+"]";
+        return "[Garden - id: " + getId() + " - " + getName() + "]";
     }
-    
 }

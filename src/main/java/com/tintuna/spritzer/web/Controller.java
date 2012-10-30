@@ -1,5 +1,6 @@
 package com.tintuna.spritzer.web;
 
+import com.tintuna.spritzer.service.AbstractService;
 import com.tintuna.spritzer.util.Loggable;
 
 import javax.faces.application.FacesMessage;
@@ -12,25 +13,37 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 /**
- * @author Antonio Goncalves
- *         http://www.antoniogoncalves.org
- *         --
+ * @author (Original) Antonio Goncalves http://www.antoniogoncalves.org --
+ * @author (Modified) Brooke Smith http://tintuna.com
  */
-
 @Loggable
-abstract class Controller {
+public abstract class Controller {
 
     // ======================================
     // =             Attributes             =
     // ======================================
-
     @Inject
     private transient Logger logger;
+    private AbstractService service;
+
+    /*
+     * Subclasses should have something like this
+     @Inject
+     public void setService(GardenService gardenService) {
+     super.setService(gardenService);
+     }
+     */
+    public void setService(AbstractService service) {
+        this.service = service;
+    }
+
+    public AbstractService getService() {
+        return service;
+    }
 
     // ======================================
     // =          Protected Methods         =
     // ======================================
-
     private String getMessage(FacesContext facesContext, String msgKey, Object... args) {
         if (facesContext == null) {
             return "";

@@ -38,13 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Schedule.findByStartDate", query = "SELECT s FROM Schedule s WHERE s.startDate = :startDate"),
     @NamedQuery(name = "Schedule.findByEndDate", query = "SELECT s FROM Schedule s WHERE s.endDate = :endDate"),
     @NamedQuery(name = "Schedule.findByGardenId", query = "SELECT s FROM Schedule s WHERE s.startDate = :startDate")})
-public class Schedule implements Serializable {
+public class Schedule extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -69,14 +64,6 @@ public class Schedule implements Serializable {
     public Schedule(Integer id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {

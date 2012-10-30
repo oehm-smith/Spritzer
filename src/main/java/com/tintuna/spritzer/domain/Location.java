@@ -34,13 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Location.findByLatitude", query = "SELECT l FROM Location l WHERE l.latitude = :latitude"),
     @NamedQuery(name = "Location.findByLongitude", query = "SELECT l FROM Location l WHERE l.longitude = :longitude"),
     @NamedQuery(name = "Location.findByDescription", query = "SELECT l FROM Location l WHERE l.description = :description")})
-public class Location implements Serializable {
+public class Location extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "latitude", precision = 22)
     private Double latitude;
@@ -56,14 +51,6 @@ public class Location implements Serializable {
     }
 
     public Location(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
         this.id = id;
     }
 

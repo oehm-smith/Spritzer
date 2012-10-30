@@ -32,13 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Weekday.findAll", query = "SELECT w FROM Weekday w"),
     @NamedQuery(name = "Weekday.findById", query = "SELECT w FROM Weekday w WHERE w.id = :id"),
     @NamedQuery(name = "Weekday.findByDayName", query = "SELECT w FROM Weekday w WHERE w.dayName = :dayName")})
-public class Weekday implements Serializable {
+public class Weekday extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Integer id;
     @Size(max = 10)
     @Column(name = "DayName", length = 10)
     private String dayName;
@@ -49,14 +44,6 @@ public class Weekday implements Serializable {
     }
 
     public Weekday(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
         this.id = id;
     }
 

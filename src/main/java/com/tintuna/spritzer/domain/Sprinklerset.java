@@ -36,13 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sprinklerset.findById", query = "SELECT s FROM Sprinklerset s WHERE s.id = :id"),
     @NamedQuery(name = "Sprinklerset.findByName", query = "SELECT s FROM Sprinklerset s WHERE s.name = :name"),
     @NamedQuery(name = "Sprinklerset.findByGarden", query = "SELECT s FROM Sprinklerset s WHERE s.gardenID = :gardenId")})
-public class Sprinklerset implements Serializable {
+public class Sprinklerset extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -64,14 +59,6 @@ public class Sprinklerset implements Serializable {
     public Sprinklerset(Integer id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {

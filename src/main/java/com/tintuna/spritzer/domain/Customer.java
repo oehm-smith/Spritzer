@@ -28,15 +28,12 @@ import javax.mail.Address;
         @NamedQuery(name = Customer.FIND_ALL, query = "SELECT c FROM Customer c")
 })
 @XmlRootElement
-public class Customer implements Serializable {
+public class Customer extends BaseEntity implements Serializable {
 
     // ======================================
     // =             Attributes             =
     // ======================================
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     @Column(unique = true, nullable = false, length = 10)
     @Login
     private String login;
@@ -139,10 +136,6 @@ public class Customer implements Serializable {
     // ======================================
     // =         Getters & setters          =
     // ======================================
-
-    public Long getId() {
-        return id;
-    }
 
     public String getLogin() {
         return login;
