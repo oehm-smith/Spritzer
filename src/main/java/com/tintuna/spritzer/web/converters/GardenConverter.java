@@ -6,6 +6,7 @@ package com.tintuna.spritzer.web.converters;
 
 import com.tintuna.spritzer.domain.Garden;
 import com.tintuna.spritzer.web.GardenController;
+import java.util.Map.Entry;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
@@ -73,7 +74,16 @@ public class GardenConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        Garden g = (Garden) value;
+        System.out.println("-> GardenConverter / getAsString - value:" + value);
+        Garden g = null;
+        if (value instanceof Garden) {
+            System.out.println("-> GardenConverter / getAsString - its a Garden.");
+            g = (Garden) value;
+        } else {
+            System.out.println("-> GardenConverter / getAsString - its an entry.");
+            Entry<Garden, String> entry = (Entry<Garden, String>) value;
+            g = (Garden) entry.getKey();
+        }
         if (g == null) {
             return "";
         }

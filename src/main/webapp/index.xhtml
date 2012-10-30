@@ -18,7 +18,7 @@
                 <h:panelGrid columns="2" rendered="#{database.alreadyLoaded}">
                     <h:outputLabel value="#{bundle.Gardens}" for="gardens" />
                     <h:selectOneMenu id="gardens" value="#{gardenController.selected}">
-                        <f:selectItems value="#{gardenController.gardens}" />
+                        <f:selectItems value="#{gardenController.gardens.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
                         <f:converter converterId="GardenConverter"/>
                         <f:ajax render="SprinklersetUI"/>
                     </h:selectOneMenu>

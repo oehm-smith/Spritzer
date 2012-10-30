@@ -9,7 +9,9 @@ import com.tintuna.spritzer.service.AbstractService;
 import com.tintuna.spritzer.service.GardenService;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -37,22 +39,28 @@ public class GardenController extends Controller implements Serializable {
         List<Garden> gardenList = gardenService.findAll();
         List<SelectItem> gardenSList = new ArrayList<SelectItem>();
         System.out.println("-> getGardens() - " + gardenList);
-        gardenSList.add(new SelectItem(null));
+//        gardenSList.add(new SelectItem(null, "-- select one --"));
+//        for (Garden g : gardenList) {
+//            gardenSList.add(new SelectItem(g));
+//        }
+        Map<Garden, String> gardensMap = new LinkedHashMap<Garden, String>();
+        gardensMap.put(null, "-- select one --");
         for (Garden g : gardenList) {
-            gardenSList.add(new SelectItem(g));
+            gardensMap.put(g, g.getName());
         }
-         System.out.println("-> getGardens() - the selected is - "+selected);
-       return gardenSList;
+        System.out.println("-> getGardens() - the selected is - " + selected);
+//        return gardenSList;
+        return gardensMap;
     }
 
     public Garden getSelected() {
-        System.out.println("GardenController / getSelected - "+selected);
+        System.out.println("GardenController / getSelected - " + selected);
         return selected;
     }
 
     public void setSelected(Garden garden) {
         selected = garden;
-        System.out.println("GardenController / setSelected - "+selected);
+        System.out.println("GardenController / setSelected - " + selected);
     }
 
     public void selectedChanged(ValueChangeEvent event) {
