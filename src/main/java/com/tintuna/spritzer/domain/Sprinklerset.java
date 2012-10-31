@@ -46,10 +46,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "sprinklersets")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Sprinklerset.findAll", query = "SELECT s FROM Sprinklerset s"),
-    @NamedQuery(name = "Sprinklerset.findById", query = "SELECT s FROM Sprinklerset s WHERE s.id = :id"),
-    @NamedQuery(name = "Sprinklerset.findByName", query = "SELECT s FROM Sprinklerset s WHERE s.name = :name"),
-    @NamedQuery(name = "Sprinklerset.findByGarden", query = "SELECT s FROM Sprinklerset s WHERE s.gardenID = :gardenId")})
+    @NamedQuery(name = "SprinklerSet.findAll", query = "SELECT s FROM Sprinklerset s"),
+    @NamedQuery(name = "SprinklerSet.findById", query = "SELECT s FROM Sprinklerset s WHERE s.id = :id"),
+    @NamedQuery(name = "SprinklerSet.findByName", query = "SELECT s FROM Sprinklerset s WHERE s.name = :name"),
+    @NamedQuery(name = "SprinklerSet.findByGarden", query = "SELECT s FROM Sprinklerset s WHERE s.gardenID = :gardenId")})
 public class Sprinklerset extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
@@ -122,7 +122,7 @@ public class Sprinklerset extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tintuna.zpersistencetest.Sprinklersets[ id=" + id + " ]";
+        return "com.tintuna.domain.Sprinklersets[ id=" + id + " ]";
     }
     
 }

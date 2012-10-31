@@ -38,13 +38,13 @@ public class ScheduleController extends Controller implements Serializable {
     private Schedule selected;
     @Inject private ScheduleService scheduleService;
 
-    public Object getGardens() {    // List<SelectItem>
-        List<Garden> gardenList = scheduleService.findAll();
-        List<SelectItem> gardenSList = new ArrayList<SelectItem>();
-        for (Garden g : gardenList) {
-            gardenSList.add(new SelectItem(g));
+    public Object getSchedules() {    // List<SelectItem>
+        List<Schedule> scheduleList = scheduleService.findAll();
+        List<SelectItem> scheduleSList = new ArrayList<SelectItem>();
+        for (Schedule g : scheduleList) {
+            scheduleSList.add(new SelectItem(g));
         }
-        return gardenSList;
+        return scheduleSList;
     }
 
     public Schedule getSelected() {

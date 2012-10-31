@@ -15,19 +15,21 @@
             </h:panelGroup>
             <h:form>
                 <h:commandLink action="#{database.loadTestData}"  value="Load development database" rendered="#{! database.alreadyLoaded}"/>
-                <h:panelGrid columns="2" rendered="#{database.alreadyLoaded}">
-                    <h:outputLabel value="#{bundle.Gardens}" for="gardens" />
-                    <h:selectOneMenu id="gardens" value="#{gardenController.selected}">
-                        <f:selectItems value="#{gardenController.gardens.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
-                        <f:ajax render="SprinklersetUI"/>
-                    </h:selectOneMenu>
-                    <h:panelGroup id="SprinklersetUI">
+                <h:panelGrid columns="1" rendered="#{database.alreadyLoaded}">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.Gardens}" for="gardens" />
+                        <h:selectOneMenu id="gardens" value="#{gardenController.selected}">
+                            <f:selectItems value="#{gardenController.gardens.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+                            <f:ajax render="SprinklersetUI"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" id="SprinklersetUI">
                         <h:outputLabel value="#{bundle.SprinklerSets}" for="sprinklerSetlist" />
-                        <h:selectOneListbox id="sprinklerSetlist" value="#{sprinklersetController.selected}" >
-                            <f:selectItems value="#{sprinklersetController.sprinklerSet}"/>
-                            <f:ajax listener="#{sprinklerSetController.selectedChangedAjax}"/>
+                        <h:selectOneListbox value="#{sprinklersetController.selected}" >
+                            <f:selectItems value="#{sprinklersetController.sprinklerSet.entrySet()}" var="entryx" itemValue="#{entryx.key}" itemLabel="#{entryx.value}"/>
+                            <!-- f:ajax listener="#{sprinklerSetController.selectedChangedAjax}"/ -->
                         </h:selectOneListbox>
-                    </h:panelGroup>
+                    </h:panelGrid>
                 </h:panelGrid>
             </h:form>
         </ui:define>

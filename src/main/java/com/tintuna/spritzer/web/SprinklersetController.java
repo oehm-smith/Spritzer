@@ -10,7 +10,9 @@ import com.tintuna.spritzer.domain.Sprinklerset;
 import com.tintuna.spritzer.service.SprinklerSetService;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -28,21 +30,24 @@ import javax.inject.Named;
 public class SprinklersetController extends Controller implements Serializable {
 
     private Sprinklerset selected;
-    @Inject private SprinklerSetService sprinklerSetService;
-    @Inject private GardenController gardenController;
+    @Inject
+    private GardenController gardenController;
+
+    @Inject
+    public void setService(SprinklerSetService service) {
+        super.setService(service);
+    }
 
     public Object getSprinklerSet() {    // List<SelectItem>
-        System.out.println("-> getSprinklerSet()");
-        if (gardenController.getSelected() == null) {
-            return null;
+        List<Sprinklerset> sprinklersetList = getService().findWithNamedQuery("SprinklerSet.findByGarden", QueryParameter.with("gardenId", gardenController.getSelected()));
+        System.out.println("-> getSprinklersets() - " + sprinklersetList);
+        Map<Sprinklerset, String> sprinklersetsMap = new LinkedHashMap<Sprinklerset, String>();
+        //sprinklersetsMap.put(null, "-- select one --");
+        for (Sprinklerset g : sprinklersetList) {
+            System.out.println("-> getSprinklerSet - value: "+g.getName()+", obj:"+g);
+            sprinklersetsMap.put(g, g.getName());
         }
-        List<Sprinklerset> sprinklerSetList = sprinklerSetService.findWithNamedQuery("Sprinklerset.findByGarden", QueryParameter.with("gardenId", gardenController.getSelected()));
-        System.out.println("SprinklerSet - " + sprinklerSetList);
-        List<SelectItem> sprinklerSetSList = new ArrayList<SelectItem>();
-        for (Sprinklerset g : sprinklerSetList) {
-            sprinklerSetSList.add(new SelectItem(g));
-        }
-        return sprinklerSetSList;
+        return sprinklersetsMap;
     }
 
     public Sprinklerset getSelected() {

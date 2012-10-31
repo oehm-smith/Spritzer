@@ -52,7 +52,7 @@ public abstract class AbstractConverter<T_Entity extends BaseEntity, T_Controlle
         if (value == null || value.trim().length() == 0) {
             return null;
         }
-        System.out.println("-> "+this.getClass().getName() + " / getAsObject - value:" + value);
+        System.out.println("-> "+this.getClass().getSimpleName() + " / getAsObject - value:" + value);
 //            GardenServiceFacade controller = (GardenServiceFacade) facesContext.getApplication().getELResolver().
 //                    getValue(facesContext.getELContext(), null, "gardenController");
 
@@ -94,13 +94,13 @@ public abstract class AbstractConverter<T_Entity extends BaseEntity, T_Controlle
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        System.out.println("-> "+this.getClass().getName()+" / getAsString - value:" + value);
+//        System.out.println("-> "+this.getClass().getSimpleName()+" / getAsString - value:" + value);
         T_Entity g = null;
         if (value instanceof BaseEntity) {  // Can't use T_Entity here
-            System.out.println("-> "+this.getClass().getName()+" / getAsString - its a T_Entity.");
+//            System.out.println("-> "+this.getClass().getSimpleName()+" / getAsString - its a T_Entity.");
             g = (T_Entity) value;
         } else {
-            System.out.println("-> "+this.getClass().getName()+" / getAsString - its an entry.");
+//            System.out.println("-> "+this.getClass().getSimpleName()+" / getAsString - its an entry.");
             Map.Entry<T_Entity, String> entry = (Map.Entry<T_Entity, String>) value;
             g = (T_Entity) entry.getKey();
         }
