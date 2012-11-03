@@ -20,13 +20,17 @@ package com.tintuna.spritzer.web.converters;
 
 import com.tintuna.spritzer.domain.Sprinklerset;
 import com.tintuna.spritzer.web.SprinklersetController;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
 
 /**
  *
  * @author bsmith
  */
-@FacesConverter(forClass=Sprinklerset.class)
+//@FacesConverter(forClass=Sprinklerset.class) - see GardenConverter
+@Named
+@RequestScoped
 public class SprinklerSetConverter extends AbstractConverter<Sprinklerset, SprinklersetController> {
 
     public SprinklerSetConverter() {

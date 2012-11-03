@@ -20,6 +20,7 @@ package com.tintuna.spritzer.web;
 
 import com.tintuna.spritzer.service.DatabaseTestData;
 import java.io.Serializable;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -35,6 +36,8 @@ public class DatabaseController extends Controller implements Serializable {
 
     private Boolean alreadyLoaded;
     @Inject private DatabaseTestData dtd;
+    @Inject 
+    private transient Logger logger;
 
     @PostConstruct
     public void init() {
@@ -43,7 +46,7 @@ public class DatabaseController extends Controller implements Serializable {
 
     public void loadTestData() {
         //addInformationMessage("LoadDatabase", null);
-        System.out.println("Load Database");
+        logger.info("Load Database");
         dtd.loadTestData();
         alreadyLoaded = true;
         //addInformationMessage("DatabaseLoaded", null);

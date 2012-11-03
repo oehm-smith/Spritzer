@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIInput;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -29,6 +30,8 @@ import javax.inject.Named;
 @SessionScoped
 public class SprinklersetController extends Controller implements Serializable {
 
+    @Inject
+    private transient Logger logger;
     private Sprinklerset selected;
     @Inject
     private GardenController gardenController;
@@ -40,11 +43,11 @@ public class SprinklersetController extends Controller implements Serializable {
 
     public Object getSprinklerSet() {    // List<SelectItem>
         List<Sprinklerset> sprinklersetList = getService().findWithNamedQuery("SprinklerSet.findByGarden", QueryParameter.with("gardenId", gardenController.getSelected()));
-        System.out.println("-> getSprinklersets() - " + sprinklersetList);
+        logger.fine("-> getSprinklersets() - " + sprinklersetList);
         Map<Sprinklerset, String> sprinklersetsMap = new LinkedHashMap<Sprinklerset, String>();
         //sprinklersetsMap.put(null, "-- select one --");
         for (Sprinklerset g : sprinklersetList) {
-            System.out.println("-> getSprinklerSet - value: "+g.getName()+", obj:"+g);
+            logger.fine("-> getSprinklerSet - value: " + g.getName() + ", obj:" + g);
             sprinklersetsMap.put(g, g.getName());
         }
         return sprinklersetsMap;
@@ -62,7 +65,7 @@ public class SprinklersetController extends Controller implements Serializable {
         Sprinklerset newValue = (Sprinklerset) event.getNewValue();
         Sprinklerset oldValue = (Sprinklerset) event.getOldValue();
         //setSelected(newValue);
-        System.out.println("-> SprinklersetController - selectedChanged - OldValue: " + oldValue + ", NewValue:" + newValue);
+        logger.fine("-> SprinklersetController - selectedChanged - OldValue: " + oldValue + ", NewValue:" + newValue);
     }
 
     public void selectedChangedAjax(AjaxBehaviorEvent e) {
@@ -70,7 +73,7 @@ public class SprinklersetController extends Controller implements Serializable {
 //        String contentId = input.getId().substring("inputfield".length());
 //        Object contentValue = (Object) input.getValue();
 //        String value = (String) contentValue;
-        System.out.println("SprinklersetController - selectedChanged - string:" + e.toString() + "," + input.getId() + "=> NUTIN");// + contentValue);
+        logger.fine("SprinklersetController - selectedChanged - string:" + e.toString() + "," + input.getId() + "=> NUTIN");// + contentValue);
 
         //setSelected((Garden) e.getNewValue());
     }

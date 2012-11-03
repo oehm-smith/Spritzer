@@ -19,15 +19,17 @@ along with Spritzer.  If not, see http://www.gnu.org/licenses/.
 package com.tintuna.spritzer.web.converters;
 
 import com.tintuna.spritzer.domain.Schedule;
-import com.tintuna.spritzer.domain.Sprinkler;
 import com.tintuna.spritzer.web.ScheduleController;
-import javax.faces.convert.FacesConverter;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author bsmith
  */
-@FacesConverter(forClass=Sprinkler.class)
+//@FacesConverter(forClass=Sprinkler.class) - see GardenConverter
+@Named
+@RequestScoped
 public class ScheduleConverter extends AbstractConverter<Schedule, ScheduleController> {
 
     public ScheduleConverter() {
