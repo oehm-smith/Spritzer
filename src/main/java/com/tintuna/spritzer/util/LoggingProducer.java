@@ -5,11 +5,9 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
-import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.inject.Singleton;
 
 /**
  * @author Antonio Goncalves http://www.antoniogoncalves.org --

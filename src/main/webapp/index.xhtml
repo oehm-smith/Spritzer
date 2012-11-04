@@ -25,7 +25,7 @@
                     </h:panelGrid>
                     <h:panelGrid columns="2" id="SprinklersetUI">
                         <h:outputLabel value="#{bundle.SprinklerSets}" for="sprinklerSetlist" />
-                        <h:selectOneListbox value="#{sprinklersetController.selected}" converter="#{sprinklerSetConverter}">
+                        <h:selectOneListbox id="sprinklerSetlist" value="#{sprinklersetController.selected}" converter="#{sprinklerSetConverter}">
                             <f:selectItems value="#{sprinklersetController.sprinklerSet.entrySet()}" var="entryx" itemValue="#{entryx.key}" itemLabel="#{entryx.value}"/>
                             <!-- f:ajax listener="#{sprinklerSetController.selectedChangedAjax}"/ -->
                         </h:selectOneListbox>

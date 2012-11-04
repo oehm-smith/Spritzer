@@ -18,7 +18,6 @@ along with Spritzer.  If not, see http://www.gnu.org/licenses/.
 **/
 package com.tintuna.spritzer.web;
 
-import com.tintuna.spritzer.domain.Garden;
 import com.tintuna.spritzer.domain.Schedule;
 import com.tintuna.spritzer.service.ScheduleService;
 import java.io.Serializable;

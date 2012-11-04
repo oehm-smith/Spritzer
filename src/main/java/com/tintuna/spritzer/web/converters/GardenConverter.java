@@ -14,16 +14,13 @@
  * Spritzer. If not, see http://www.gnu.org/licenses/.
  *
  * Copyright 2012 Brooke Smith, tintuna.com.
-*
+ *
  */
 package com.tintuna.spritzer.web.converters;
 
 import com.tintuna.spritzer.domain.Garden;
 import com.tintuna.spritzer.web.GardenController;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -48,7 +45,13 @@ import javax.inject.Named;
 @RequestScoped
 public class GardenConverter extends AbstractConverter<Garden, GardenController> {
 
-    public GardenConverter() {
-        super(Garden.class, GardenController.class);
+    @Inject
+    public void setController(GardenController controller) {
+        this.controller = controller;
+    }
+
+    @Inject
+    public void setEntity(Garden entity) {
+        this.entity = entity;
     }
 }

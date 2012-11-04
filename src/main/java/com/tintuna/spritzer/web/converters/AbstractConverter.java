@@ -20,20 +20,14 @@ package com.tintuna.spritzer.web.converters;
 
 import com.tintuna.spritzer.domain.BaseEntity;
 import com.tintuna.spritzer.web.Controller;
-import com.tintuna.spritzer.web.GardenController;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.logging.Logger;
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
+import javax.annotation.PostConstruct;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.servlet.ServletContext;
 
 /**
  *
@@ -44,16 +38,47 @@ public abstract class AbstractConverter<T_Entity extends BaseEntity, T_Controlle
 
     @Inject
     protected transient Logger logger;
-    Class<T_Entity> entityClass;
-    Class<T_Controller> controllerClass;
+    /**
+     * Set by @Injecting in subclass - see methods setController(T_Controller controller) and setEntity(T_Entity entity)
+     * Relates to Generic BaseEntity parameter
+     */
+    protected Controller controller;
+     /**
+     * Set by @Injecting in subclass - see methods setController(T_Controller controller) and setEntity(T_Entity entity).
+     * Relates to Generic Controller parameter
+     */
+    protected BaseEntity entity;
 
-//    public AbstractConverter() {
-//    }
-
-    protected AbstractConverter(Class<T_Entity> entityClass, Class<T_Controller> controllerClass) {
-        this.entityClass = entityClass;
-        this.controllerClass = controllerClass;
+    public AbstractConverter() {
     }
+
+    /**
+     * Force a check that the required Entity and Controller were injected.
+     */
+    @PostConstruct
+    private void validate() {
+        if (controller == null) {
+            throw new IllegalArgumentException("Required property controller not set - subclass should have it Inject'ed");
+        }
+        if (entity == null) {
+            throw new IllegalArgumentException("Required property entity not set - subclass should have it Inject'ed");
+        }
+    }
+    /**
+     * The subclass needs to set the Controller it uses (eg. GardenController for Garden entity).  It can @Inject it like:
+     * @Inject public void setController(GardenController controller) {this.controller = controller}
+     * This causes the specified Controller to be @Injected.
+     * @param controller is the subclass of Controller to set.
+     */
+    public abstract void setController(T_Controller controller);
+
+   /**
+     * The subclass needs to set the BaseEntity it uses (eg. Garden entity).  It can @Inject it like:
+     * @Inject public void setEntity(GardenEntity controller) {this.controller = controller}
+     * This causes the specified Controller to be @Injected.
+     * @param controller is the subclass of Controller to set.
+     */
+    public abstract void setEntity(T_Entity entity);
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -61,37 +86,9 @@ public abstract class AbstractConverter<T_Entity extends BaseEntity, T_Controlle
             return null;
         }
 
-        T_Controller controller = getFacade(context);
-
-        T_Entity g = (T_Entity) controller.getService().find(entityClass, value);//getCrudService().find(Garden.class, value);
+        T_Entity g = (T_Entity) controller.getService().find(entity.getClass(), value);//entityClass
         logger.finer("-> " + this.getClass().getSimpleName() + " / getAsObject - return: " + g);
         return g;
-    }
-
-    private BeanManager getBeanManager(FacesContext facesContext) {
-        BeanManager bm = null;
-        bm = (BeanManager) ( (ServletContext) facesContext.getExternalContext().getContext() )
-                .getAttribute("javax.enterprise.inject.spi.BeanManager");
-        if (bm != null) {
-            return bm;
-        }
-        try {
-            InitialContext initialContext = new InitialContext();
-            bm = (BeanManager) initialContext.lookup("java:comp/BeanManager");
-        }
-        catch (NamingException e) {
-            logger.severe("ERROR - Couldn't get BeanManager through JNDI");
-            return null;
-        }
-        return bm;
-    }
-
-    private T_Controller getFacade(FacesContext facesContext) {
-        BeanManager bm = getBeanManager(facesContext);
-        Bean<GardenController> bean = (Bean<GardenController>) bm.getBeans(GardenController.class).iterator().next();
-        CreationalContext<GardenController> ctx = bm.createCreationalContext(bean);
-        T_Controller dao = (T_Controller) bm.getReference(bean, controllerClass, ctx); // this could be inlined, but intentionally left this way
-        return dao;
     }
 
     @Override
