@@ -1,6 +1,6 @@
 h1. Spritzer
 
-"See Screenshot at":https://raw.github.com/oehm-smith/Spritzer/master/FrontPage.png
+"Open Screenshot":https://raw.github.com/oehm-smith/Spritzer/master/FrontPage.png
 
 h2. Overview
 Java EE 6 web app to control watering systems.  
