@@ -42,15 +42,17 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class GardenController extends Controller implements Serializable {
+public class GardenController extends Controller<GardenService> implements Serializable {
 
     private Garden selected;
-    private transient @Inject
-    Logger logger;
+    @Inject
+    private transient Logger logger;
 
+    @Override
     @Inject
     public void setService(GardenService gardenService) {
-        super.setService(gardenService);
+        //super.setService(gardenService);
+        this.service = gardenService;
     }
 
     public Object getGardens() {    // List<SelectItem>

@@ -32,7 +32,7 @@ import javax.inject.Named;
  */
 @Named("database")
 @SessionScoped
-public class DatabaseController extends Controller implements Serializable {
+public class DatabaseController implements Serializable {
 
     private Boolean alreadyLoaded;
     @Inject private DatabaseTestData dtd;

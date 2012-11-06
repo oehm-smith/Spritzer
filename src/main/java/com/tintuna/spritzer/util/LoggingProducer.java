@@ -42,7 +42,6 @@ public class LoggingProducer implements Serializable {
     @Produces
     public Logger produceLogger(InjectionPoint injectionPoint) {
         Logger logger = Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
-        System.out.println("produceLogger:"+logger);
         logger.setLevel(Level.FINEST);
         return logger;
     }

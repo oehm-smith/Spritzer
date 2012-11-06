@@ -35,27 +35,22 @@ import java.util.logging.Logger;
  * @author (Modified) Brooke Smith http://tintuna.com
  */
 @Loggable
-public abstract class Controller {
+public abstract class Controller<T_Service extends AbstractService> {
 
     // ======================================
     // =             Attributes             =
     // ======================================
     @Inject
     private transient Logger logger;
-    private AbstractService service;
+    protected T_Service service;
 
-    /*
-     * Subclasses should have something like this
-     @Inject
-     public void setService(GardenService gardenService) {
-     super.setService(gardenService);
-     }
+    /**
+     * @Inject this in the subclass to get the Service from the container.
+     * @param service 
      */
-    public void setService(AbstractService service) {
-        this.service = service;
-    }
+    public abstract void setService(T_Service service);
 
-    public AbstractService getService() {
+    public T_Service getService() {
         return service;
     }
 
