@@ -26,10 +26,17 @@
                     <h:panelGrid columns="2" id="SprinklersetUI">
                         <h:outputLabel value="#{bundle.SprinklerSets}" for="sprinklerSetlist" />
                         <h:selectOneListbox id="sprinklerSetlist" value="#{sprinklersetController.selected}" converter="#{sprinklerSetConverter}">
-                            <f:selectItems value="#{sprinklersetController.sprinklerSet.entrySet()}" var="entryx" itemValue="#{entryx.key}" itemLabel="#{entryx.value}"/>
-                            <!-- f:ajax listener="#{sprinklerSetController.selectedChangedAjax}"/ -->
+                            <f:selectItems value="#{sprinklersetController.sprinklerSet.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                            <f:ajax render="SprinklerUI"/>
                         </h:selectOneListbox>
                     </h:panelGrid>
+                    <h:panelGrid columns="2" id="SprinklerUI">
+                        <h:outputLabel value="#{bundle.Sprinkler}" for="sprinklerlist" />
+                        <h:selectOneListbox id="sprinklerlist" value="#{sprinklerController.selected}" converter="#{sprinklerConverter}">
+                            <f:selectItems value="#{sprinklerController.sprinklers.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}"/>
+                        </h:selectOneListbox>
+                    </h:panelGrid>
+                    <hr/>
                 </h:panelGrid>
             </h:form>
         </ui:define>

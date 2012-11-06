@@ -50,7 +50,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sprinkler.findAll", query = "SELECT s FROM Sprinkler s"),
     @NamedQuery(name = "Sprinkler.findById", query = "SELECT s FROM Sprinkler s WHERE s.id = :id"),
     @NamedQuery(name = "Sprinkler.findByName", query = "SELECT s FROM Sprinkler s WHERE s.name = :name"),
-    @NamedQuery(name = "Sprinkler.findByConfiguration", query = "SELECT s FROM Sprinkler s WHERE s.configuration = :configuration")})
+    @NamedQuery(name = "Sprinkler.findByConfiguration", query = "SELECT s FROM Sprinkler s WHERE s.configuration = :configuration"),
+    @NamedQuery(name = "Sprinkler.findBySprinklerset", query = "SELECT s FROM Sprinkler s WHERE s.sprinklerSetID = :sprinklerset")})
 public class Sprinkler extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
