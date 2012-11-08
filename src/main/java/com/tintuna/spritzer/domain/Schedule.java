@@ -135,7 +135,7 @@ public class Schedule extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tintuna.zpersistencetest.Schedule[ id=" + id + " ]";
+        return "com.tintuna.domain.Schedule[ id=" + id + " ]";
     }
     
 }

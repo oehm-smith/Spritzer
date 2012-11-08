@@ -41,7 +41,7 @@ public abstract class Controller<T_Service extends AbstractService> {
     // =             Attributes             =
     // ======================================
     @Inject
-    private transient Logger logger;
+    protected transient Logger logger;
     protected T_Service service;
 
     /**

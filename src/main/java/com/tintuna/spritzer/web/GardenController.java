@@ -58,25 +58,25 @@ public class GardenController extends Controller<GardenService> implements Seria
     public Object getGardens() {    // List<SelectItem>
         List<Garden> gardenList = getService().findAll();
         List<SelectItem> gardenSList = new ArrayList<SelectItem>();
-        logger.fine("-> getGardensX() - " + gardenList);
+        logger.finer("-> getGardensX() - " + gardenList);
         Map<Garden, String> gardensMap = new LinkedHashMap<Garden, String>();
         gardensMap.put(null, "-- select one --");
         for (Garden g : gardenList) {
             gardensMap.put(g, g.getName());
         }
-        logger.fine("-> getGardens() - the selected is - " + selected);
+        logger.finer("-> getGardens() - the selected is - " + selected);
 
         return gardensMap;
     }
 
     public Garden getSelected() {
-        logger.fine("GardenController / getSelected - " + selected);
+        logger.finest("GardenController / getSelected - " + selected);
         return selected;
     }
 
     public void setSelected(Garden garden) {
         selected = garden;
-        logger.fine("GardenController / setSelected - " + selected);
+        logger.finest("GardenController / setSelected - " + selected);
     }
 
     public void selectedChanged(ValueChangeEvent event) {
@@ -91,7 +91,7 @@ public class GardenController extends Controller<GardenService> implements Seria
 //        String contentId = input.getId().substring("inputfield".length());
 //        Object contentValue = (Object) input.getValue();
 //        String value = (String) contentValue;
-        logger.fine("selectedChanged - string:" + e.toString() + "," + input.getId() + "=> NUTIN");// + contentValue);
+        logger.fine("selectedChangedAjax - string:" + e.toString() + "," + input.getId() + "=> NUTIN");// + contentValue);
 
         //setSelected((Garden) e.getNewValue());
     }

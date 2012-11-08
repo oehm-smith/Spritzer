@@ -100,7 +100,7 @@ public class Weekday extends BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.tintuna.zpersistencetest.Weekdays[ id=" + id + " ]";
+        return "com.tintuna.domain.Weekdays[ id=" + id + " ]";
     }
     
 }

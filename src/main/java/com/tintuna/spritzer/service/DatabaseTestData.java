@@ -194,7 +194,7 @@ public class DatabaseTestData implements Serializable {
 
     private void createProgrammes() {
         programme1 = new Programme();
-        programme1.setDayOfWeekID(weekMap.get(Days.SATURDAY));
+        programme1.setDayOfWeek(weekMap.get(Days.SATURDAY));
         Calendar onTime = Calendar.getInstance();
         onTime.set(Calendar.HOUR, 16);
         onTime.set(Calendar.MINUTE, 00);
@@ -202,7 +202,7 @@ public class DatabaseTestData implements Serializable {
         programme1.setDuration(60.0);
 
         programme2 = new Programme();
-        programme2.setDayOfWeekID(weekMap.get(Days.MONDAY));
+        programme2.setDayOfWeek(weekMap.get(Days.MONDAY));
         onTime.set(Calendar.HOUR, 23);
         onTime.set(Calendar.MINUTE, 00);
         programme2.setOnTime(onTime.getTime());

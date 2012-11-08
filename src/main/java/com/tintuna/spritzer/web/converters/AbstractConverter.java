@@ -70,7 +70,7 @@ public abstract class AbstractConverter<T_Entity extends BaseEntity, T_Controlle
      * This causes the specified Controller to be @Injected.
      * @param controller is the subclass of Controller to set.
      */
-    public abstract void setController(T_Controller controller);
+    protected abstract void setController(T_Controller controller);
 
    /**
      * The subclass needs to set the BaseEntity it uses (eg. Garden entity).  It can @Inject it like:
@@ -78,7 +78,16 @@ public abstract class AbstractConverter<T_Entity extends BaseEntity, T_Controlle
      * This causes the specified Controller to be @Injected.
      * @param controller is the subclass of Controller to set.
      */
-    public abstract void setEntity(T_Entity entity);
+    protected abstract void setEntity(T_Entity entity);
+    
+    /**
+     * Give entities a chance to return specific information about itself instead of just an Id.  Such as the name.
+     * @param id
+     * @return 
+     */
+    protected String getEntitySpecificConverterString(T_Entity entity, Integer id) {
+        return id.toString();
+    }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -105,6 +114,6 @@ public abstract class AbstractConverter<T_Entity extends BaseEntity, T_Controlle
             return "";
         }
         logger.finer("-> " + this.getClass().getName() + " / getAsString - object:" + g + ", id:" + g.getId());
-        return g.getId().toString();
+        return getEntitySpecificConverterString(g, g.getId());
     }
 }

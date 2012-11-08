@@ -18,9 +18,10 @@
  */
 package com.tintuna.spritzer.web;
 
-import com.tintuna.spritzer.domain.Schedule;
-import com.tintuna.spritzer.service.ScheduleService;
+import com.tintuna.spritzer.domain.Programme;
+import com.tintuna.spritzer.service.ProgrammeService;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -37,35 +38,47 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class ScheduleController extends Controller<ScheduleService> implements Serializable {
+public class ProgrammeController extends Controller<ProgrammeService> implements Serializable {
 
     @Inject
     private transient Logger logger;
-    private Schedule selected;
+    private Programme selected;
+    
+    @Inject
+    private ScheduleController scheduleController;
 
     @Override
     @Inject
-    public void setService(ScheduleService service) {
+    public void setService(ProgrammeService service) {
         this.service = service;
     }
 
-    public DataModel<Schedule> getSchedules() {    // List<SelectItem>, Object
-        List<Schedule> scheduleList = getService().findAll();
-        logger.finer("-> getSchedules() - " + scheduleList);
-        return new ListDataModel<Schedule>(scheduleList);
+    public DataModel<Programme> getProgrammes() {    // List<SelectItem>, Object
+        List<Programme> programmeList = getService().findAll();
+        logger.finer("-> getProgrammes() - " + programmeList);
+        return new ListDataModel<Programme>(programmeList);
     }
 
-    public Schedule getSelected() {
+    public DataModel<Programme> getProgrammesFromSchedule() { 
+        if (scheduleController.getSelected() == null) {
+            return null;
+        }
+        List<Programme> programmeList = Collections.list(Collections.enumeration(scheduleController.getSelected().getProgrammesCollection()));
+        logger.finer("-> programmesFromSchedule() - " + programmeList);
+        return new ListDataModel<Programme>(programmeList);        
+    }
+    
+    public Programme getSelected() {
         return selected;
     }
 
-    public void setSelected(Schedule schedule) {
-        selected = schedule;
+    public void setSelected(Programme programme) {
+        selected = programme;
     }
 
     public String add() {
         //addInformationMessage("NoButonYet", null);
-        selected = new Schedule();
+        selected = new Programme();
         return "/view/schedule/Create";
     }
 
@@ -77,8 +90,7 @@ public class ScheduleController extends Controller<ScheduleService> implements S
         getService().create(getSelected());
         FacesContext context = FacesContext.getCurrentInstance();  
           
-        context.addMessage(null, new FacesMessage("New schedule '"+selected.getName()+"' created "));  
-        System.out.println("GOT HERE");
+        context.addMessage(null, new FacesMessage("New programme '"+selected+"' created "));  
         return list()+"?faces-redirect=true";
     }
 }

@@ -124,11 +124,11 @@ public class Programme extends BaseEntity implements Serializable {
         this.scheduleCollection = scheduleCollection;
     }
 
-    public Weekday getDayOfWeekID() {
+    public Weekday getDayOfWeek() {
         return dayOfWeekID;
     }
 
-    public void setDayOfWeekID(Weekday dayOfWeekID) {
+    public void setDayOfWeek(Weekday dayOfWeekID) {
         this.dayOfWeekID = dayOfWeekID;
     }
 

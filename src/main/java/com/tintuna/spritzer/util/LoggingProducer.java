@@ -42,7 +42,7 @@ public class LoggingProducer implements Serializable {
     @Produces
     public Logger produceLogger(InjectionPoint injectionPoint) {
         Logger logger = Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
-        logger.setLevel(Level.FINEST);
+        logger.setLevel(Level.FINER);
         return logger;
     }
 }

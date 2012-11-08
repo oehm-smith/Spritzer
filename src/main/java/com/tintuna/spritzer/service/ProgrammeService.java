@@ -18,15 +18,10 @@ along with Spritzer.  If not, see http://www.gnu.org/licenses/.
 **/
 package com.tintuna.spritzer.service;
 
-import com.tintuna.spritzer.crud.CrudService;
 import com.tintuna.spritzer.domain.Programme;
-import com.tintuna.spritzer.domain.Schedule;
-import com.tintuna.spritzer.exception.ValidationException;
 import com.tintuna.spritzer.util.Loggable;
 import java.io.Serializable;
-import java.util.List;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 /**
  *
