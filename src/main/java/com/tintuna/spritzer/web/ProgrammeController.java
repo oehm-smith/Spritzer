@@ -60,7 +60,7 @@ public class ProgrammeController extends Controller<ProgrammeService> implements
     }
 
     public DataModel<Programme> getProgrammesFromSchedule() { 
-        if (scheduleController.getSelected() == null) {
+        if (scheduleController.getSelected() == null || scheduleController.getSelected().getProgrammesCollection() == null) {
             return null;
         }
         List<Programme> programmeList = Collections.list(Collections.enumeration(scheduleController.getSelected().getProgrammesCollection()));

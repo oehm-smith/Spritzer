@@ -19,13 +19,9 @@
                     <h:outputLabel value="#{bundle.CreateScheduleLabel_name}" for="name" />
                     <h:inputText id="name" value="#{scheduleController.selected.name}" title="#{bundle.Schedule_Name}" required="true" requiredMessage="#{bundle.CreateScheduleRequiredMessage_name}"/>
                     <h:outputLabel value="#{bundle.Schedule_StartDate}" for="startDate" /> 
-                    <h:inputText id="startDate" value="#{scheduleController.selected.startDate}" title="#{bundle.Schedule_StartDate}" > 
-                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
-                    </h:inputText> 
+                    <p:calendar value="#{scheduleController.selected.startDate}" pattern="dd/MM/yyyy"/>
                     <h:outputLabel value="#{bundle.Schedule_EndDate}" for="endDate" /> 
-                    <h:inputText id="endDate" value="#{scheduleController.selected.endDate}" title="#{bundle.Schedule_EndDate}" > 
-                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
-                    </h:inputText>
+                    <p:calendar value="#{scheduleController.selected.endDate}" pattern="dd/MM/yyyy"/>
                 </h:panelGrid>
                 <br />
                 <p:commandButton actionListener="#{scheduleController.create}" value="#{bundle.CreateScheduleSaveLink}" update="messagePanel"/>
