@@ -35,3 +35,6 @@ h3. Starting app
 
 __
 ??"Tintuna.com":http://tintuna.com??
+
+"!https://cruel-carlota.pagodabox.com/06543bd4a96f324140f531b06d3c3d7a(githalytics.com alpha)!":http://githalytics.com/oehm-smith/Spritzer
+
